@@ -8,6 +8,10 @@ function App() {
   const foodOptions = ['排骨飯', '拉麵', '雞腿飯'];
   // 可在此陣列中插入新的食物種類
   const [selectValue, setSelectValue] = useState('');
+
+  const [agree, setAgree] = useState(false);
+  const [likeList, setLikeList] = useState([]);
+  const fruitOptions = ['西瓜', '芒果', '芭樂'];
   return (
     <>
       <h1>可於react控制的表單元素</h1>
@@ -59,6 +63,41 @@ function App() {
         <option value="audi">audi</option>
         <option value="honda">honda</option>
       </select>
+      <h2>核對方塊(單一)</h2>
+      <input
+        type="checkbox"
+        checked={agree}
+        onChange={(e) => {
+          setAgree(e.target.checked);
+        }}
+      />
+      <label>同意註冊條款</label>
+      <h2>核對方塊(群組)</h2>
+      <p>請選擇您喜歡的水果</p>
+      {fruitOptions.map((v, i) => {
+        return (
+          <div key={i}>
+            <input
+              type="checkbox"
+              value={v}
+              checked={likeList.includes(v)}
+              onChange={(e) => {
+                if (likeList.includes(e.target.value)) {
+                  const newLikeList = likeList.filter(
+                    (v) => v !== e.target.value
+                  );
+                  setLikeList(newLikeList);
+                } else {
+                  const newLikeList = [...likeList];
+                  newLikeList.push(e.target.value);
+                  setLikeList(newLikeList);
+                }
+              }}
+            />
+            <label>{v}</label>
+          </div>
+        );
+      })}
     </>
   );
 }
