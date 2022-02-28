@@ -7,6 +7,7 @@ function App() {
   const [radioValue, setRadioValue] = useState('');
   const foodOptions = ['排骨飯', '拉麵', '雞腿飯'];
   // 可在此陣列中插入新的食物種類
+  const [selectValue, setSelectValue] = useState('');
   return (
     <>
       <h1>可於react控制的表單元素</h1>
@@ -42,6 +43,22 @@ function App() {
           </div>
         );
       })}
+      <h2>4.下拉選單</h2>
+      <label htmlFor="cars">選擇車子的牌子：</label>
+      <select
+        name="cars"
+        id="cars"
+        value={selectValue}
+        onChange={(e) => {
+          setSelectValue(e.target.value);
+        }}
+      >
+        <option value="">請選擇</option>
+        <option value="volvo">volvo</option>
+        <option value="toyota">toyota</option>
+        <option value="audi">audi</option>
+        <option value="honda">honda</option>
+      </select>
     </>
   );
 }
